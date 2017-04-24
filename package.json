@@ -1,0 +1,39 @@
+{
+  "name": "palringo-ts",
+  "version": "1.0.26",
+  "description": "Palringo TypeScript API",
+  "main": "palringo-ts.min.js",
+  "files": [
+    "index.d.ts"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": " webpack --progress --color && npm run declartions",
+    "watch": "webpack --watch --color --progress",
+    "declartions": "dts-generator --name palringo-ts --project ./ --out ./index.unformatted.d.ts && rimraf ./typings && node after-declaration.js && rimraf ./index.unformatted.d.ts",
+    "publish:patch": "npm run build && npm version patch && npm publish"
+  },
+  "keywords": [
+    "palringo",
+    "api"
+  ],
+  "author": "Alec Scratch <go.away.or.be.hacked@gmail.com> (http://docs.dontpanicitscool.org/palringo-ts/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^7.0.12",
+    "@types/socket.io-client": "^1.4.29",
+    "dts-generator": "^2.1.0",
+    "rimraf": "^2.6.1",
+    "ts-loader": "^2.0.3",
+    "typescript": "^2.2.2",
+    "webpack": "^2.4.1"
+  },
+  "dependencies": {
+    "socket.io-client": "^1.7.3"
+  },
+  "-vs-binding": {
+    "ProjectOpened": [
+      "watch"
+    ]
+  }
+}
