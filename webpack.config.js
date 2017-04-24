@@ -1,7 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
 
-
 function root(args) {
     var _root = path.resolve(__dirname);
     args = Array.prototype.slice.call(arguments, 0);
