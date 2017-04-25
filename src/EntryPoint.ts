@@ -1,8 +1,8 @@
 import { IPluginOptions, PluginInstance } from './Plugins/Plugin';
 import { PalringoClient } from './PalClient';
 
-export function PalBot(): PalringoClient {
-    return new PalringoClient();
+export function PalBot(url?: string): PalringoClient {
+    return new PalringoClient(url);
 }
 
 export function Plugin(command: string, options?: IPluginOptions) {

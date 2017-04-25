@@ -16,8 +16,8 @@ export class PalringoClient {
         return this._con.On;
     }
 
-    constructor() {
-        this._con = new Client();
+    constructor(url?: string) {
+        this._con = new Client(url);
     }
 
     registerPlugins(cmdChar?: string) {
