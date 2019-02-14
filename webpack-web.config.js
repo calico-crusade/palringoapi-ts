@@ -15,8 +15,7 @@ module.exports = [
     output: {
         path: root('dist'),
         filename: 'palringo-ts.web.min.js',
-        libraryTarget: 'var',
-        library: 'palringo-ts'
+        libraryTarget: 'var'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],

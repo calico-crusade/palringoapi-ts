@@ -5,8 +5,8 @@
   "main": "dist/palringo-ts.node.min.js",
   "files": [
     "index.d.ts",
-    "dist/palringo-ts.web.min.js",
-    "dist/palringo-ts.node.min.js"
+    "dist/palringo-ts.node.min.js",
+    "dist/palringo-ts.web.min.js"
   ],
   "scripts": {
     "build": "npm run build-web && npm run build-node && npm run declarations",
