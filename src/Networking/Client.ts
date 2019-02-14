@@ -10,7 +10,7 @@ import { User, Group, IMessage, Message, ExtendedMessage, ExtendedUser, AdminAct
 /// <reference types="socket.io-client" />
 
 export class Client {
-    public serverUrl: string = 'ws://v3.palringo.im:3051/';
+    public serverUrl: string = 'https://v3.palringo.im:3051';
     public connection: SocketIOClient.Socket;
     public Info: Information;
     static debug = true;

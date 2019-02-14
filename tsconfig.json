@@ -4,13 +4,12 @@
     "noEmitOnError": true,
     "removeComments": true,
     "sourceMap": false,
-    "target": "es5",
+    "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
     "lib": [
-      "es2015",
-      "dom"
+      "es2015"
     ],
     "outDir": "./typings",
     "allowUnreachableCode": true,
