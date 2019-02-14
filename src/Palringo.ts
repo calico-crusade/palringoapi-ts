@@ -1,1 +1,2 @@
-﻿export * from './EntryPoint';
+﻿export * from 'fast-text-encoding';
+export * from './EntryPoint';

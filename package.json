@@ -35,7 +35,8 @@
   },
   "dependencies": {
     "socket.io-client": "^2.2.0",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "fast-text-encoding": "^1.0.0"
   },
   "-vs-binding": {
     "ProjectOpened": [
