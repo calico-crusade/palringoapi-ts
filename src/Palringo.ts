@@ -1,2 +1,2 @@
-﻿export * from 'fast-text-encoding';
+﻿require('fast-text-encoding');
 export * from './EntryPoint';
