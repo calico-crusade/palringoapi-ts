@@ -10,7 +10,7 @@ export interface IPluginOptions {
     description?: string;
     gmOnly?: boolean;
     pmOnly?: boolean;
-    cmdParser?: <T>(msg: string) => T;
+    cmdParser?: (msg: string) => any;
 }
 
 export class PluginInstance {

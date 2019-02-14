@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+const nodeExtenerals = require('webpack-node-externals');
 
 function root(args) {
     var _root = path.resolve(__dirname);
@@ -9,16 +10,16 @@ function root(args) {
 
 module.exports = [
 {
+    target: 'web',
     entry: root('src', 'Palringo.ts'),
     output: {
-        path: root(),
-        filename: 'palringo-ts.min.js',
-        libraryTarget: 'commonjs'
+        path: root('dist'),
+        filename: 'palringo-ts.web.min.js'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
         alias: {
-            'socket.io-client': root('node_modules', 'socket.io-client', 'dist', 'socket.io.min.js')
+            'socket.io-client': root('node_modules', 'socket.io-client', 'dist', 'socket.io.js')
         }
     },
     module: {
@@ -30,12 +31,7 @@ module.exports = [
             loader: 'ts-loader'
         }]
     },
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false, dead_code: true },
-            mangle: true,
-            sourceMap: false,
-            beautify: false
-        })
-    ]
+    optimization: {
+        minimize: true
+    }
 }];

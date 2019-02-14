@@ -67,7 +67,7 @@ export class Client {
     writePacketAdv(packet: Packet, success?: (data: any) => void, failed?: (data) => void) {
         this.connection.emit(packet.command, { body: packet.body }, (data: { code: number, body: any }) => {
             if (Client.debug) {
-                console.debug('Packet Processed: ' + packet.command, data);
+                console.log('Packet Processed: ' + packet.command, data);
             }
             
             if (data.code == 200) {

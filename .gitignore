@@ -29,6 +29,7 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+dist
 
 # Optional npm cache directory
 .npm
@@ -37,5 +38,5 @@ jspm_packages
 .node_repl_history
 
 #Auto-Generated files
-palringo-ts.min.js
+palringo-ts.*.min.js
 index.d.ts
