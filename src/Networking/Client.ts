@@ -43,6 +43,7 @@ export class Client {
             });
         });
         this.connection.on('connect', (data) => this.On.Trigger('cn', data));
+        this.connection.on('disconnect', (data) => this.On.Trigger('dn', data));
     }
 
     //#region Packet Senders
