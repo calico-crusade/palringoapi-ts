@@ -155,7 +155,7 @@ export class Message {
         this.isHtml = msg.mimeType == 'text/html';
 
         if (!this.isVoice) {
-            this.text = new TextDecoder('utf8').decode(this.data);
+            this.text = new TextDecoder().decode(this.data);
         }
     }
 }
