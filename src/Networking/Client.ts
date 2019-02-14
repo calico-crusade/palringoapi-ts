@@ -1,6 +1,6 @@
 ﻿import { Information } from './../Subprofile/Information';
 import { Dictionary } from './../Polyfill/Dictionary';
-var io = require('./../../node_modules/socket.io-client/dist/socket.io.js');
+import * as io from 'socket.io-client';
 import { Packet } from './Packet';
 import { Delegates } from './Delegates';
 import { PalUtils } from './../Utilities/PalUtils';
@@ -27,10 +27,10 @@ export class Client {
     }
 
     login(email: string, password: string) {
-        var url = this.serverUrl + "?token=" + PalUtils.DeviceToken() + "&device=web";
+        var url = this.serverUrl + "?device=web&token=" + PalUtils.DeviceToken();
         this.connection = io(url, {
             transports: ['websocket'],
-            reconnect: true
+            reconnection: true
         });
         this.connection.on('welcome', (data) => { 
             this.writePacket(LoginPacket(email, password), (data) => {
