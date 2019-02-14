@@ -34,12 +34,12 @@ export class Client {
         });
         this.connection.on('welcome', (data) => { 
             this.writePacket(LoginPacket(email, password), (data) => {
-                if (data.code == 200) {
-                    this._id = data.body.id;
-                    this.On.Trigger('ls', data.body);
-                } else {
+                if (data.code != 200){
                     this.On.Trigger('lf', data);
+                    return;
                 }
+                this._id = data.body.id;
+                this.On.Trigger('ls', data.body);
             });
         });
         this.connection.on('connect', (data) => this.On.Trigger('cn', data));
@@ -101,31 +101,19 @@ export class Client {
             var userId = msg.originator;
             this.Info.requestUser(userId, (u) => {
                 msg.userProfile = u;
-                if (msg.isGroup) {
-                    var groupId = msg.recipient;
-                    this.Info.requestGroup(groupId, (g) => {
-                        msg.group = g;
-                        this.On.Trigger('gm', msg);
-                    });
-                } else {
+                if (!msg.isGroup) {
                     this.On.Trigger('pm', msg);
+                    return;
                 }
+
+                var groupId = msg.recipient;
+                this.Info.requestGroup(groupId, (g) => {
+                    msg.group = g;
+                    this.On.Trigger('gm', msg);
+                });
+                    
             });
 
-            /*if (data.body.isGroup) {
-                var groupId = msg.recipient;
-                this.Info.requestUser(userId, (u) => {
-                    msg.userProfile = u;
-                    this.Info.requestGroup(groupId, (g) => {
-                        msg.group = g;
-                        this.On.Trigger('gm', msg);
-                    });
-                });
-                //this.On.Trigger('gm', new Message(data.body));
-            } else {
-                var userId = msg.recipient;
-                //this.On.Trigger('pm', new Message(data.body));
-            }*/
         });
         //Subscribe to all private messages
         this.writePacket(PrivateMessageSubscribe());
@@ -134,10 +122,6 @@ export class Client {
             if (gs.length <= 0)
                 return;
             
-            this.getMembers(gs[0].id, (res) => {
-                if (this.debug)
-                    console.log('group member response', res);
-            });
             this.writePacket(GroupMessageSubscribe(PalUtils.IdArray(gs)));
         });
         //Setup admin action handling
