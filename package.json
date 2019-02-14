@@ -1,6 +1,6 @@
 {
   "name": "palringo-ts",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "Palringo TypeScript API",
   "main": "dist/palringo-ts.node.min.js",
   "files": [
