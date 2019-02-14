@@ -135,7 +135,8 @@ export class Client {
                 return;
             
             this.getMembers(gs[0].id, (res) => {
-                console.log('group member response', res);
+                if (this.debug)
+                    console.log('group member response', res);
             });
             this.writePacket(GroupMessageSubscribe(PalUtils.IdArray(gs)));
         });
