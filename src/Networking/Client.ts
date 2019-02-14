@@ -13,7 +13,7 @@ export class Client {
     public serverUrl: string = 'https://v3.palringo.com:3051';
     public connection: SocketIOClient.Socket;
     public Info: Information;
-    static debug = true;
+    public debug = false;
     private _id: number;
 
     public On: Delegates;
@@ -67,7 +67,7 @@ export class Client {
 
     writePacketAdv(packet: Packet, success?: (data: any) => void, failed?: (data) => void) {
         this.connection.emit(packet.command, { body: packet.body }, (data: { code: number, body: any }) => {
-            if (Client.debug) {
+            if (this.debug) {
                 console.log('Packet Processed: ' + packet.command, data);
             }
             

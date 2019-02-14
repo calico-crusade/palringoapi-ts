@@ -5,7 +5,7 @@ import { Information } from './Subprofile/Information';
 import { Client } from './Networking/Client';
 
 export class PalringoClient {
-    private _con: Client;
+    public _con: Client;
 
     public commandCharacter: string;
 
