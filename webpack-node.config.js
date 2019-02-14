@@ -32,7 +32,7 @@ module.exports = [
         }]
     },
     optimization: {
-        minimize: true
+        minimize: false
     },
     externals: [nodeExtenerals()]
 }];
