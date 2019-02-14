@@ -40,3 +40,4 @@ dist
 #Auto-Generated files
 palringo-ts.*.min.js
 index.d.ts
+test.js
