@@ -13,7 +13,7 @@
     "watch": "webpack --watch --color --progress --config ./webpack-web.config.js",
     "declarations": "dts-generator --project ./ --out ./index.unformatted.d.ts && rimraf ./typings && node after-declaration.js && rimraf ./index.unformatted.d.ts",
     "git-commit": "git add . && git commit -m \"automatic commit\" && git push",
-    "publish-npm": "npm run build && npm run git-commit && npm version patch && npm publish && npm run git-commit",
+    "publish-npm": "npm run build && npm run git-commit && npm version patch && npm publish",
     "build-web": "webpack --progress --color --config ./webpack-web.config.js",
     "build-node": "webpack --progress --color --config ./webpack-node.config.js"
   },
