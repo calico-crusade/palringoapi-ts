@@ -61,18 +61,16 @@ export class PluginInstance {
 
     private static onMessage(client: PalringoClient, msg: ExtendedMessage) {
         if (!msg.isText) {
-            console.log('Plugin Failed. Message is not text.');
             return;
         }
         
         if (msg.text.indexOf(client.commandCharacter) != 0) {
-            console.log('No Command character present');
             return;
         }
 
         var ps = PluginInstance.plugins;
 
-        var msgText = msg.text.slice(client.commandCharacter.length, msg.text.length);
+        var msgText = msg.text.slice(client.commandCharacter.length, msg.text.length).trim();
 
         var val = ps.getBy((k, v) => {
             if (msgText.indexOf(k) === 0)
@@ -89,26 +87,23 @@ export class PluginInstance {
             return;
         }
 
-        msgText = msgText.slice(val.command.length, msgText.length);
+        msgText = msgText.slice(val.command.length, msgText.length).trim();
 
         if (!val.options.authCheck(msg.userProfile, msg.group)) {
-            console.log('Failed Auth Check');
             return;
         }
 
         if (val.options.pmOnly && msg.isGroup) {
-            console.log('Pm Only with Group Message');
             return;
         }
 
         if (val.options.gmOnly && !msg.isGroup) {
-            console.log('Gm Only with Private Message');
             return;
         }
 
         //Do.Some.Translation.Stuff();
 
-        val.oncmdex.call(null, client, msg);
+        val.oncmdex.call(this, client, msg);
     }
   
     public command: string;
