@@ -1,0 +1,25 @@
+{
+    "name": "palringo-api-test",
+    "version": "1.0.0",
+    "private": true,
+    "description": "none",
+    "scripts": {
+        "watch": "webpack --watch --progress --color",
+        "build": "webpack --progress --color",
+        "go": "npm i && npm run build && node test.js"
+    },
+    "devDependencies": {
+        "@types/node": "^7.0.12",
+        "@types/socket.io-client": "^1.4.29",
+        "dts-generator": "^3.0.0",
+        "rimraf": "^2.6.3",
+        "ts-loader": "^5.3.3",
+        "typescript": "^3.3.3",
+        "webpack": "^4.29.3",
+        "webpack-cli": "^3.2.3",
+        "webpack-node-externals": "^1.7.2"
+    },
+    "dependencies": {
+        "palringo-ts": "^1.0.45"
+    }
+}
