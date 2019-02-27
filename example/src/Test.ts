@@ -17,7 +17,7 @@ class Test {
 
         var gr = client.Info.Groups.get(msg.group.id);
         
-        var hist = client.Info.messageHistory(msg.id, new Date(), msg.isGroup, (t) => {
+        var hist = client.Info.messageHistory(msg.id, msg.timestamp, msg.isGroup, (t) => {
             console.log('Message history', t);
         });
     }
