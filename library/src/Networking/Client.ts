@@ -58,15 +58,31 @@ export class Client {
 
     //#endregion
 
+    private buildPacketBody(packet: Packet) : any {
+        var any : any = {};
+
+        if (packet.body != null && packet.body != undefined){
+            any.body = packet.body;
+        }
+
+        if (packet.headers != null && packet.headers != undefined){
+            any.headers = packet.headers;
+        }
+
+        return any;
+    }
+
     writePacket(packet: Packet, callBack?: (data: any) => void) {
+        var p = this.buildPacketBody(packet);
         if (!callBack)
-            this.connection.emit(packet.command, { body: packet.body });
+            this.connection.emit(packet.command, p);
         else
-            this.connection.emit(packet.command, { body: packet.body }, callBack);
+            this.connection.emit(packet.command, p, callBack);
     }
 
     writePacketAdv(packet: Packet, success?: (data: any) => void, failed?: (data) => void) {
-        this.connection.emit(packet.command, { body: packet.body }, (data: { code: number, body: any }) => {
+        var p = this.buildPacketBody(packet);
+        this.connection.emit(packet.command, p, (data: { code: number, body: any }) => {
             if (this.debug) {
                 console.log('Packet Processed: ' + packet.command, data);
             }

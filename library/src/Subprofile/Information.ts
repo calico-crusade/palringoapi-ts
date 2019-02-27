@@ -1,7 +1,7 @@
 import { Dictionary } from './../Polyfill/Dictionary';
 import { Client } from './../Networking/Client';
 import { ExtendedUser, User, Group } from './Subprofile';
-import { UserProfile, GroupList, GroupProfile } from './../Networking/PacketTemplate';
+import { UserProfile, GroupList, GroupProfile, ConversationHistory } from './../Networking/PacketTemplate';
 
 export class Information {
 
@@ -56,6 +56,16 @@ export class Information {
 
             if (callback)
                 callback(groups);
+        });
+    }
+
+    messageHistory(from: Date, callback?: (any) => void) {
+        this.con.writePacketAdv(ConversationHistory(from), (thing) => {
+            console.log('conversation history', thing);
+            if (callback)
+                callback(thing);
+        }, (d) => {
+            console.log('conversation history failed', d);
         });
     }
 }

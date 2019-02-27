@@ -22,6 +22,14 @@ export function PrivateMessageSubscribe() {
     return new Packet('message private subscribe', {});
 }
 
+export function ConversationHistory(latestMessage: Date) {
+    return new Packet("message conversation list", {
+        timestamp: latestMessage
+    }, {
+        version: 2
+    })
+}
+
 export function GroupMessageSubscribe(id: number[]) {
     return new Packet('message group subscribe', {
         idList: id
