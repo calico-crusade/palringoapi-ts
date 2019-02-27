@@ -17,6 +17,9 @@ class Test {
 
         var gr = client.Info.Groups.get(msg.group.id);
         
+        var hist = client.Info.messageHistory(msg.id, new Date(), msg.isGroup, (t) => {
+            console.log('Message history', t);
+        });
     }
 
     start() {
@@ -26,9 +29,6 @@ class Test {
         this.bot.On.LoginSuccess = (user) => {
             console.log('User logged in: ', user.nickname);
             this.loggedIn = true;
-            this.bot.Info.messageHistory(new Date(), (d) => {
-                console.log('message history', d);
-            });
         };
         this.bot.On.LoginFailed = (reason) => { 
             console.log('Login Failed: ', reason);

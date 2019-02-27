@@ -30,7 +30,7 @@ export function ConversationHistory(latestMessage: Date) {
     })
 }
 
-export function MessageHistory(id: number, from: Date, group: boolean) {
+export function MessageHistory(id: number, from: number, group: boolean) {
     return new Packet(group ? 'message group history list' : 'message private history list', {
         id: id,
         timestampEnd: from
