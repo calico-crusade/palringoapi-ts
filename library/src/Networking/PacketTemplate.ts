@@ -30,6 +30,15 @@ export function ConversationHistory(latestMessage: Date) {
     })
 }
 
+export function MessageHistory(id: number, from: Date, group: boolean) {
+    return new Packet(group ? 'message group history list' : 'message private history list', {
+        id: id,
+        timestampEnd: from
+    }, {
+        version: 2
+    });
+}
+
 export function GroupMessageSubscribe(id: number[]) {
     return new Packet('message group subscribe', {
         idList: id

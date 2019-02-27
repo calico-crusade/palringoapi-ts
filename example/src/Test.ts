@@ -26,6 +26,9 @@ class Test {
         this.bot.On.LoginSuccess = (user) => {
             console.log('User logged in: ', user.nickname);
             this.loggedIn = true;
+            this.bot.Info.messageHistory(new Date(), (d) => {
+                console.log('message history', d);
+            });
         };
         this.bot.On.LoginFailed = (reason) => { 
             console.log('Login Failed: ', reason);
@@ -33,7 +36,7 @@ class Test {
         };
         this.bot.On.Disconnected = () => console.log('Disconnected');
         this.bot.On.Connected = () => console.log('Connected');
-        this.bot.login('example@email.com', 'password');
+        this.bot.login('roulettetest@palbot.com', 'asdf');
     }
 }
 

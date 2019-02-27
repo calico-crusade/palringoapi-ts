@@ -171,3 +171,21 @@ export class AdminAction {
     targetId: number;
     sourceId: number;
 }
+
+export interface IIdHash {
+    id: number;
+    hash: string;
+}
+
+export interface IHistoricalMessageMetadata {
+    isSpam?: boolean;
+}
+
+export interface IHistoricalMessage {
+    isGroup: boolean;
+    timestamp: number;
+    data: ArrayBuffer;
+    originator: IIdHash;
+    recipient: IIdHash;
+    metadata: IHistoricalMessageMetadata;
+}

@@ -1,7 +1,7 @@
 import { Dictionary } from './../Polyfill/Dictionary';
 import { Client } from './../Networking/Client';
-import { ExtendedUser, User, Group } from './Subprofile';
-import { UserProfile, GroupList, GroupProfile, ConversationHistory } from './../Networking/PacketTemplate';
+import { ExtendedUser, User, Group, IHistoricalMessage } from './Subprofile';
+import { UserProfile, GroupList, GroupProfile, ConversationHistory, MessageHistory } from './../Networking/PacketTemplate';
 
 export class Information {
 
@@ -59,13 +59,21 @@ export class Information {
         });
     }
 
-    messageHistory(from: Date, callback?: (any) => void) {
-        this.con.writePacketAdv(ConversationHistory(from), (thing) => {
-            console.log('conversation history', thing);
+    conversationList(from: Date, callback?: (history: IHistoricalMessage[]) => void) {
+        this.con.writePacketAdv(ConversationHistory(from), (thing : IHistoricalMessage[]) => {
             if (callback)
                 callback(thing);
         }, (d) => {
-            console.log('conversation history failed', d);
+            console.log('Convertsation list: ', d);
+        });
+    }
+
+    messageHistory(id: number, from: Date, group: boolean, callback?: (thing) => void) {
+        this.con.writePacketAdv(MessageHistory(id, from, group), (thing) => {
+            if (callback)
+                callback(thing);
+        }, (d) => {
+            console.log('Error fetching message history', d);
         });
     }
 }
