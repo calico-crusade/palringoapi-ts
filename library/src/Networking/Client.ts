@@ -69,6 +69,7 @@ export class Client {
             any.headers = packet.headers;
         }
 
+        console.log('packet -> ', packet.command, any);
         return any;
     }
 

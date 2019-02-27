@@ -10,15 +10,14 @@ class Test {
     })
     static testPlugin(client: PalringoClient, msg: ExtendedMessage) {
         client.reply(msg, "Hello how are you?");
-        client.privateMessage(msg.userProfile.id, 'hello world');
+        client.privateMessage(msg.originator, 'hello world');
 
         if (msg.isGroup)
             client.groupMessage(msg.group.id, 'hello world');
 
-        var gr = client.Info.Groups.get(msg.group.id);
         var dt = new Date();
             dt.setMinutes(dt.getMinutes() + 10);
-        var hist = client.Info.messageHistory(msg.id, dt, msg.isGroup, (t) => {
+        var hist = client.Info.messageHistory(msg.isGroup ? msg.recipient : msg.originator, dt, msg.isGroup, (t) => {
             
             console.log('Message history', t);
         });
