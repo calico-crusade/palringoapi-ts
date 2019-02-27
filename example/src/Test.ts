@@ -16,8 +16,10 @@ class Test {
             client.groupMessage(msg.group.id, 'hello world');
 
         var gr = client.Info.Groups.get(msg.group.id);
-        
-        var hist = client.Info.messageHistory(msg.id, msg.timestamp, msg.isGroup, (t) => {
+        var dt = new Date();
+            dt.setMinutes(dt.getMinutes() + 10);
+        var hist = client.Info.messageHistory(msg.id, dt, msg.isGroup, (t) => {
+            
             console.log('Message history', t);
         });
     }

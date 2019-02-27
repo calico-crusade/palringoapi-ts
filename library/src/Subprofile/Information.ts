@@ -70,11 +70,12 @@ export class Information {
 
     messageHistory(id: number, from: Date, group: boolean, callback?: (thing) => void) {
         var f = from.getTime();
-        this.con.writePacketAdv(MessageHistory(id, f, group), (thing) => {
+        var p = MessageHistory(id, f, group);
+        this.con.writePacketAdv(p, (thing) => {
             if (callback)
                 callback(thing);
         }, (d) => {
-            console.log('Error fetching message history', d);
+            console.log('Error fetching message history', d, p);
         });
     }
 }
