@@ -116,7 +116,7 @@ export class ExtendedGroup extends Group {
 }
 
 export interface IMessage {
-    id: number;
+    id: string;
     isGroup: boolean;
     mimeType: string;
     originator: number;
@@ -126,12 +126,12 @@ export interface IMessage {
 }
 
 export class Message {
-    id: number;
+    id: string;
     isGroup: boolean;
     mimeType: string;
     originator: number;
     recipient: number;
-    timestamp: number;
+    timestamp: Date;
     data: ArrayBuffer;
 
     isImage: boolean;
@@ -140,13 +140,15 @@ export class Message {
     isHtml: boolean;
     text: string;
 
-    constructor(msg: IMessage) {
+    constructor(msg?: IMessage) {
+        if (!msg)
+            return;
+
         this.id = msg.id;
         this.isGroup = msg.isGroup;
         this.mimeType = msg.mimeType;
         this.originator = msg.originator;
         this.recipient = msg.recipient;
-        this.timestamp = msg.timestamp;
         this.data = msg.data;
 
         this.isImage = msg.mimeType == 'text/image_link';
@@ -182,10 +184,12 @@ export interface IHistoricalMessageMetadata {
 }
 
 export interface IHistoricalMessage {
+    id: string;
     isGroup: boolean;
     timestamp: number;
     data: ArrayBuffer;
-    originator: IIdHash;
-    recipient: IIdHash;
+    originator: IIdHash | number;
+    recipient: IIdHash | number;
     metadata: IHistoricalMessageMetadata;
+    mimeType: string;
 }

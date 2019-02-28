@@ -1,7 +1,8 @@
 import { Dictionary } from './../Polyfill/Dictionary';
 import { Client } from './../Networking/Client';
-import { ExtendedUser, User, Group, IHistoricalMessage } from './Subprofile';
+import { ExtendedUser, User, Group, IHistoricalMessage, Message } from './Subprofile';
 import { UserProfile, GroupList, GroupProfile, ConversationHistory, MessageHistory } from './../Networking/PacketTemplate';
+import { PalUtils } from '../Utilities/PalUtils';
 
 export class Information {
 
@@ -59,20 +60,20 @@ export class Information {
         });
     }
 
-    conversationList(from: Date, callback?: (history: IHistoricalMessage[]) => void) {
+    conversationList(from: Date, callback?: (history: Message[]) => void) {
         this.con.writePacketAdv(ConversationHistory(from), (thing : IHistoricalMessage[]) => {
             if (callback)
-                callback(thing);
+                callback(PalUtils.fromHistory(thing));
         }, (d) => {
             console.log('Convertsation list: ', d);
         });
     }
 
-    messageHistory(id: number, from: Date, group: boolean, callback?: (thing) => void) {
+    messageHistory(id: number, from: Date, group: boolean, callback?: (hist : Message[]) => void) {
         var p = MessageHistory(id, from, group);
-        this.con.writePacketAdv(p, (thing) => {
+        this.con.writePacketAdv(p, (thing : IHistoricalMessage[]) => {
             if (callback)
-                callback(thing);
+                callback(PalUtils.fromHistory(thing));
         }, (d) => {
             console.log('Error fetching message history', d, p);
         });
