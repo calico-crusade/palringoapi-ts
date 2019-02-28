@@ -19,7 +19,7 @@ class Test {
             dt.setMinutes(dt.getMinutes() + 10);
         var hist = client.Info.messageHistory(msg.isGroup ? msg.recipient : msg.originator, dt, msg.isGroup, (t) => {
             
-            console.log('Message history', t);
+            console.log('You have Message history', t);
         });
     }
 
@@ -37,7 +37,7 @@ class Test {
         };
         this.bot.On.Disconnected = () => console.log('Disconnected');
         this.bot.On.Connected = () => console.log('Connected');
-        this.bot.login('roulettetest@palbot.com', 'asdf');
+        this.bot.login('example@example.com', 'password');
     }
 }
 

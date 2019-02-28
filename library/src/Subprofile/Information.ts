@@ -65,7 +65,7 @@ export class Information {
             if (callback)
                 callback(PalUtils.fromHistory(thing));
         }, (d) => {
-            console.log('Convertsation list: ', d);
+            console.log('Convertsation list Error: ', d);
         });
     }
 
