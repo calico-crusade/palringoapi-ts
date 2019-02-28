@@ -30,4 +30,12 @@ export class PalUtils {
     static EndsWith(str: string, find: string) {
         return str.indexOf(find) == (str.length - find.length);
     }
+
+    static toPalTime(date: Date) {
+        return date.getTime() * 1e3; //weird date format...?
+    }
+    
+    static fromPalTime(data: number) {
+        return new Date(data / 1e3);
+    }
 }

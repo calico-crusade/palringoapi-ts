@@ -1,4 +1,5 @@
 ﻿import { Packet } from './Packet';
+import { PalUtils } from './../Utilities/PalUtils';
 
 export function LoginPacket(u: string, p: string) {
     return new Packet('security login', {
@@ -22,18 +23,19 @@ export function PrivateMessageSubscribe() {
     return new Packet('message private subscribe', {});
 }
 
-export function ConversationHistory(latestMessage: Date) {
-    return new Packet("message conversation list", {
-        timestamp: latestMessage
-    }, {
+export function ConversationHistory(latestMessage?: Date) {
+
+    var b = latestMessage ? { timestamp: latestMessage } : {};
+
+    return new Packet("message conversation list", b, {
         version: 2
     })
 }
 
-export function MessageHistory(id: number, from: number, group: boolean) {
+export function MessageHistory(id: number, from: Date, group: boolean) {
     return new Packet(group ? 'message group history list' : 'message private history list', {
         id: id,
-        timestampEnd: from
+        timestampEnd: PalUtils.toPalTime(from)
     }, {
         version: 2
     });

@@ -69,8 +69,7 @@ export class Information {
     }
 
     messageHistory(id: number, from: Date, group: boolean, callback?: (thing) => void) {
-        var f = from.getTime();
-        var p = MessageHistory(id, f, group);
+        var p = MessageHistory(id, from, group);
         this.con.writePacketAdv(p, (thing) => {
             if (callback)
                 callback(thing);
